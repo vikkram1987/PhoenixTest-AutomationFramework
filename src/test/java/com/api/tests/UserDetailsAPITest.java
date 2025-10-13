@@ -22,7 +22,7 @@ public class UserDetailsAPITest {
 	given().baseUri(ConfigManager.getProperty("BASE_URI")).and()
 	.header(authHeader)
 	.and()
-	.accept(ContentType.JSON)
+	.contentType(ContentType.JSON)
 	.log().all()
 	.when()
 	.get("/userdetails")

@@ -14,18 +14,38 @@ public class ConfigManager {
 	// src/test/resources/Config/config.properties
 
 	private static Properties prop = new Properties();
-	public static String path="config/config.properties";
+	public static String path;
+	private static String env;
 
 	private ConfigManager() {
 		// This constructer restricts creating object for ConfigManager Class
 	}
 
 	static {
-	  InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
-	  
-	  if(input==null) {
-		 throw new RuntimeException("Cannot find the file in the path" + path);
-	  }
+
+		env = System.getProperty("env");
+		env = env.toLowerCase().trim();
+
+		switch (env) {
+		/*
+		 * case "dev":{ path= "Config/config.dev.properties"; break;
+		 */
+
+		case "dev" -> path = "Config/config.dev.properties";
+
+		case "qa" -> path = "Config/config.qa.properties";
+
+		case "uat" -> path = "Config/config.dev.properties";
+
+		default -> path = "Config/config.dev.properties";
+
+		}
+
+		InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
+
+		if (input == null) {
+			throw new RuntimeException("Cannot find the file in the path" + path);
+		}
 		try {
 			prop.load(input);
 		} catch (FileNotFoundException e) {

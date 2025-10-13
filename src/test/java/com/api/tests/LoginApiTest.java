@@ -23,12 +23,12 @@ public class LoginApiTest {
 
 
 		// baseURI="http://64.227.160.186:9000/v1";
-
+        System.out.println(System.getProperty("env"));
 		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
 		given().baseUri(ConfigManager.getProperty("BASE_URI")).
-		accept(ContentType.JSON)
+		contentType(ContentType.JSON)
 		.and().body(userCredentials)
-		.and().log().all().when().post("/login").then().log().all().statusCode(200).and()
+		.and().log().all().when().post("login").then().log().all().statusCode(200).and()
 		.body("message", equalTo("Success")).and()
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/Login_response_schema.json"));
 	}
