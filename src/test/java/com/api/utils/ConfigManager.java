@@ -22,8 +22,12 @@ public class ConfigManager {
 	}
 
 	static {
-
 		env = System.getProperty("env");
+		if (env == null) {
+
+			env = "qa";
+		}
+
 		env = env.toLowerCase().trim();
 
 		switch (env) {
