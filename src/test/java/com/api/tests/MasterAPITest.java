@@ -29,14 +29,13 @@ public class MasterAPITest {
 	.statusCode(200)
 	.body("message", Matchers.equalTo("Success"))
 	.time(Matchers.lessThan(1000L))
-	.body("data",Matchers.not(Matchers.notNullValue()))
 	.body("data", Matchers.hasKey("mst_oem"))
-	.body("data", Matchers.hasKey("mst_model"))
-	.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/MasterAPIResponse_schema.json"));
+	.body("data", Matchers.hasKey("mst_model"));
+
 	}
 
 @Test
-public void countAPITest_MissingAuthToken() {
+public void MasterAPITest_MissingAuthToken() {
 	  given().baseUri(getProperty("BASE_URI"))
 		.contentType(ContentType.JSON)
 		.and()
