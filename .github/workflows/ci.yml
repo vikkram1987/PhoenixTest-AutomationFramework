@@ -5,7 +5,19 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
+  schedule: #set the cron for midnight ist  -----UTC
+    - cron: "30 18 * * *"
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment"
+        type: choice
+        options: [qa,dev,uat]
+        default: qa
+        required: true
+        
+        
+  
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,4 +31,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Executing Test Automation Framework 
-      run: mvn clean test -DsuiteXmlFile=./testng.xml -Denv=qa
+      run: mvn clean test -DsuiteXmlFile=./testng.xml -Denv="${{ github.event.inputs.env }}"
