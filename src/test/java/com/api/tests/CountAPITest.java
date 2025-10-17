@@ -8,8 +8,10 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import com.api.constants.Roles;
+import com.api.constants.Role;
+import com.api.utils.SpecUtil;
 
+import groovyjarjarpicocli.CommandLine.Spec;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -17,18 +19,12 @@ public class CountAPITest {
    
   @Test    
 	public void getCountAPI() {
-		given().baseUri(getProperty("BASE_URI"))
-		.contentType(ContentType.JSON)
-		.and()
-		.header("Authorization", getToken(Roles.FD))
-		.and()
-		.when()
+		given()
+		.spec(SpecUtil.requestSpecWithAuth(Role.FD))
 		.get("dashboard/count")
 		.then()
-		.log().all()
-		.statusCode(200)
+		.spec(SpecUtil.responseSpec())
 		.body("message", Matchers.equalTo("Success"))
-		.time(Matchers.lessThan(1000L))
 		.body("data.size()",Matchers.equalTo(3))
 		.body("data.count",Matchers.everyItem(Matchers.greaterThanOrEqualTo(0)))
 		.body("data.label",Matchers.everyItem(Matchers.not(Matchers.blankOrNullString())))
@@ -39,11 +35,8 @@ public class CountAPITest {
   
   @Test
   public void countAPITest_MissingAuthToken() {
-	  given().baseUri(getProperty("BASE_URI"))
-		.contentType(ContentType.JSON)
-		.and()
-//		.header("Authorization", getToken(Roles.FD))
-//		.and()
+		given()
+		.spec(SpecUtil.requestSpec())
 		.when()
 		.get("dashboard/count")
 		.then()

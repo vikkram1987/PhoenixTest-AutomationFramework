@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.testng.annotations.Test;
 
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 import com.pojo.UserCredentials;
 
 import groovy.util.logging.Log;
@@ -20,17 +21,17 @@ public class LoginApiTest {
 
 	@Test
 	public void LoginApiTests() throws IOException {
-
-
-		// baseURI="http://64.227.160.186:9000/v1";
-        System.out.println(System.getProperty("env"));
+		System.out.println(System.getProperty("env"));
 		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
-		given().baseUri(ConfigManager.getProperty("BASE_URI")).
-		contentType(ContentType.JSON)
-		.and().body(userCredentials)
-		.and().log().all().when().post("login").then().log().all().statusCode(200).and()
-		.body("message", equalTo("Success")).and()
-		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/Login_response_schema.json"));
+		given().spec(SpecUtil.requestSpec(userCredentials))
+				/*
+				 * .baseUri(ConfigManager.getProperty("BASE_URI"))
+				 * .contentType(ContentType.JSON)
+				 * 
+				 * .body(userCredentials)
+				 */
+				.post("login").then().spec(SpecUtil.responseSpec()).body("message", equalTo("Success")).and()
+				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/Login_response_schema.json"));
 	}
 
 }
