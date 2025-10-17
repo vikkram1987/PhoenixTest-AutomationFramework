@@ -3,9 +3,11 @@ package com.api.tests;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import com.api.constants.Roles;
+import com.api.constants.Role;
+
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -18,17 +20,12 @@ public class MasterAPITest {
 @Test
 	public void MasterAPI() {
 	
-	given().baseUri(ConfigManager.getProperty("BASE_URI"))
-	.contentType(ContentType.JSON)
-	.header("Authorization",AuthTokenProvider.getToken(Roles.FD))
-	.log().all()
+	given()
+	.spec(SpecUtil.requestSpecWithAuth(Role.FD))
 	.when()
 	.post("master")
 	.then()
-	.log().all()
-	.statusCode(200)
-	.body("message", Matchers.equalTo("Success"))
-	.time(Matchers.lessThan(1000L))
+    .spec(SpecUtil.responseSpec())
 	.body("data", Matchers.hasKey("mst_oem"))
 	.body("data", Matchers.hasKey("mst_model"));
 

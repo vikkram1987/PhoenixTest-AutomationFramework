@@ -1,6 +1,6 @@
 package com.api.constants;
 
-public enum Roles {
+public enum Role {
 	FD,SUP,ENG,QC
 
 }
