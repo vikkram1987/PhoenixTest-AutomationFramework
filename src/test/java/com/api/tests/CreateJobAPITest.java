@@ -1,5 +1,6 @@
 package com.api.tests;
 
+import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
@@ -13,8 +14,13 @@ import com.pojo.CustomerProduct;
 import com.pojo.Problems;
 
 import io.restassured.http.ContentType;
+import io.restassured.module.jsv.JsonSchemaValidator;
 
 import static io.restassured.RestAssured.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
 
 public class CreateJobAPITest {
 
@@ -28,13 +34,13 @@ public class CreateJobAPITest {
 		CustomerAddress customerAddress = new CustomerAddress("23", "qwerty", "22 parkside avenue", "qwert",
 				"Newcastle upon Tyne", "560045", "India", "Assam");
 		CustomerProduct customerProduct = new CustomerProduct("2025-07-15T23:00:00.000Z", "13231644980993",
-				"13231644980996", "13231644980996", "2025-07-15T23:00:00.000Z", 3, 3);
+				"13231644980902", "13231644980902", "2025-07-15T23:00:00.000Z", 3, 3);
 		Problems problems=new Problems(3,"Slow phone and apps crashing");
-		Problems[] problemsArray=new Problems[1];
-		problemsArray[0]=problems;
+		List<Problems> problemsList=new ArrayList<Problems>();
+		problemsList.add(problems);
 		
 		CreateJobPayload createJobPayload = new CreateJobPayload(0, 2, 1, 2, customer, customerAddress, customerProduct,
-				problemsArray);
+				problemsList);
 
 		given().spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
 				/*
@@ -45,7 +51,14 @@ public class CreateJobAPITest {
 		.and()
 		.when().log().all()
 		.post("job/create").then()
-		.spec(SpecUtil.responseSpec());
+		.spec(SpecUtil.responseSpec())
+		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/CreatJobApiResponse_schema.json"))
+		.body("message",Matchers.equalTo("Job created successfully. "))
+		.body("data.mst_service_location_id",Matchers.equalTo(1))
+		.body("data.mst_platform_id",Matchers.equalTo(2))
+		.body("data.mst_warrenty_status_id",Matchers.equalTo(1))
+		.body("data.job_number",Matchers.startsWith("JOB"));
+		
 
 	}
 
