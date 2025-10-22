@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.api.constants.Role;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 import com.pojo.CreateJobPayload;
 import com.pojo.Customer;
@@ -33,8 +34,8 @@ public class CreateJobAPITest {
 				"alternate@gmail.com");
 		CustomerAddress customerAddress = new CustomerAddress("23", "qwerty", "22 parkside avenue", "qwert",
 				"Newcastle upon Tyne", "560045", "India", "Assam");
-		CustomerProduct customerProduct = new CustomerProduct("2025-07-15T23:00:00.000Z", "13231644980993",
-				"13231644980902", "13231644980902", "2025-07-15T23:00:00.000Z", 3, 3);
+		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "13231644980993",
+				"13231644980903", "13231644980903", DateTimeUtil.getTimeWithDaysAgo(10), 3, 3);
 		Problems problems=new Problems(3,"Slow phone and apps crashing");
 		List<Problems> problemsList=new ArrayList<Problems>();
 		problemsList.add(problems);
