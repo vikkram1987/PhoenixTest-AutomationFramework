@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.*;
 
 public class MasterAPITest {
 
-@Test
+	@Test(description = "Verify if the Master details API response are shown", groups = { "api", "regression", "smoke" })
 	public void MasterAPI() {
 	
 	given()
@@ -31,7 +31,7 @@ public class MasterAPITest {
 
 	}
 
-@Test
+	@Test(description = "Verify if the Master details API response are shown with error resposne", groups = { "api", "regression", "smoke" })
 public void MasterAPITest_MissingAuthToken() {
 	  given().baseUri(getProperty("BASE_URI"))
 		.contentType(ContentType.JSON)
