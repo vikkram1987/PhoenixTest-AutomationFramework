@@ -1,6 +1,7 @@
 package com.api.tests;
 
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constants.Model;
@@ -26,11 +27,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 
 public class CreateJobAPITest {
-
-
-	@Test
-	public void creatJobAPITest() {
-		
+	
+	private CreateJobPayload createJobPayload;
+	
+	@BeforeMethod(description="creating payload for createjob API")
+	public void setup() {
 
 		Customer customer = new Customer("Vikkram", "Sasidharan", "9344086123", "", "vikkram87@gmail.com",
 				"alternate@gmail.com");
@@ -42,8 +43,29 @@ public class CreateJobAPITest {
 		List<Problems> problemsList=new ArrayList<Problems>();
 		problemsList.add(problems);
 		
-		CreateJobPayload createJobPayload = new CreateJobPayload(0, 2, 1, 2, customer, customerAddress, customerProduct,
-				problemsList);
+	createJobPayload = new CreateJobPayload(0, 2, 1, 2, customer, customerAddress, customerProduct,
+				problemsList);	
+	}
+
+
+	@Test(description = "Verify if the create job API response are shown", groups = { "api", "regression", "smoke" })
+	public void creatJobAPITest() {
+		
+		/*
+		 * Customer customer = new Customer("Vikkram", "Sasidharan", "9344086123", "",
+		 * "vikkram87@gmail.com", "alternate@gmail.com"); CustomerAddress
+		 * customerAddress = new CustomerAddress("23", "qwerty", "22 parkside avenue",
+		 * "qwert", "Newcastle upon Tyne", "560045", "India", "Assam"); CustomerProduct
+		 * customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10),
+		 * "13231644980993", "13231644980903", "13231644980903",
+		 * DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(),
+		 * Model.NEXUS_2_BLUE.getCode()); Problems problems=new
+		 * Problems(3,"Slow phone and apps crashing"); List<Problems> problemsList=new
+		 * ArrayList<Problems>(); problemsList.add(problems);
+		 * 
+		 * CreateJobPayload createJobPayload = new CreateJobPayload(0, 2, 1, 2,
+		 * customer, customerAddress, customerProduct, problemsList);
+		 */
 
 		given().spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
 				/*

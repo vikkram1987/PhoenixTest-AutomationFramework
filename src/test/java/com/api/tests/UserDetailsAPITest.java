@@ -17,18 +17,17 @@ import io.restassured.http.Header;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class UserDetailsAPITest {
-	
-	@Test	
+
+	@Test(description = "Verify if the user details API response are shown", groups = { "api", "regression", "smoke" })
 	public void UserDetailsAPITest() throws IOException {
 
-	given().spec(SpecUtil.requestSpecWithAuth(FD))
-	.when()
-	.get("/userdetails")
-	.then()
-    .spec(SpecUtil.responseSpec())
-    .and()
-	.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponse_schema.json"));
-		
+		given().spec(SpecUtil.requestSpecWithAuth(FD))
+		        .when().get("/userdetails")
+		        .then().spec(SpecUtil.responseSpec())
+				.and()
+				.body(JsonSchemaValidator
+				.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponse_schema.json"));
+
 	}
 
 }

@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.*;
 
 import java.io.IOException;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.utils.ConfigManager;
@@ -18,11 +19,18 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 
 public class LoginApiTest {
+	
+	UserCredentials userCredentials;
+	
+	@BeforeMethod(description="create payload for the loagin API")
+	public void setup() {
+		userCredentials = new UserCredentials("iamfd", "password");
+	}
+	
 
-	@Test
+	@Test(description = "Veifying if login api is working for FD user", groups = { "api", "regression", "smoke" })
 	public void LoginApiTests() throws IOException {
-		System.out.println(System.getProperty("env"));
-		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
+		//UserCredentials userCredentials = new UserCredentials("iamfd", "password");
 		given().spec(SpecUtil.requestSpec(userCredentials))
 				/*
 				 * .baseUri(ConfigManager.getProperty("BASE_URI"))
