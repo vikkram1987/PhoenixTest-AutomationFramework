@@ -3,6 +3,8 @@ package com.api.tests;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import com.api.constants.Model;
+import com.api.constants.Product;
 import com.api.constants.Role;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
@@ -35,7 +37,7 @@ public class CreateJobAPITest {
 		CustomerAddress customerAddress = new CustomerAddress("23", "qwerty", "22 parkside avenue", "qwert",
 				"Newcastle upon Tyne", "560045", "India", "Assam");
 		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "13231644980993",
-				"13231644980903", "13231644980903", DateTimeUtil.getTimeWithDaysAgo(10), 3, 3);
+				"13231644980903", "13231644980903", DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
 		Problems problems=new Problems(3,"Slow phone and apps crashing");
 		List<Problems> problemsList=new ArrayList<Problems>();
 		problemsList.add(problems);
