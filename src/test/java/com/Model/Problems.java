@@ -1,4 +1,4 @@
-package com.pojo;
+package com.Model;
 
 public record Problems
 ( int id,

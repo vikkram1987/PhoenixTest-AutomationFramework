@@ -1,15 +1,18 @@
-package com.pojo;
+package com.demo.csv;
 
-public class UserCredentials {
-	
+public class UserPOJO {
+
 	private String username;
 	private String password;
-	
+
+	public UserPOJO() {
+		
+	}
 	/**
 	 * @param username
 	 * @param password
 	 */
-	public UserCredentials(String username, String password) {
+	public UserPOJO(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -45,11 +48,7 @@ public class UserCredentials {
 
 	@Override
 	public String toString() {
-		return "UserCredentials [username=" + username + ", password=" + password + "]";
+		return "UserPOJO [username=" + username + ", password=" + password + "]";
 	}
-	
-	
-	
-	
 
 }

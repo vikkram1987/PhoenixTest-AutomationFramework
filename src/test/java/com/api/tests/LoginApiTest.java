@@ -9,9 +9,9 @@ import java.io.IOException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.Model.UserCredentials;
 import com.api.utils.ConfigManager;
 import com.api.utils.SpecUtil;
-import com.pojo.UserCredentials;
 
 import groovy.util.logging.Log;
 import io.restassured.http.ContentType;

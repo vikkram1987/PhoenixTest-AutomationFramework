@@ -4,6 +4,11 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.Model.CreateJobPayload;
+import com.Model.Customer;
+import com.Model.CustomerAddress;
+import com.Model.CustomerProduct;
+import com.Model.Problems;
 import com.api.constants.Model;
 import com.api.constants.Product;
 import com.api.constants.Role;
@@ -11,11 +16,6 @@ import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
 import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
-import com.pojo.CreateJobPayload;
-import com.pojo.Customer;
-import com.pojo.CustomerAddress;
-import com.pojo.CustomerProduct;
-import com.pojo.Problems;
 
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
