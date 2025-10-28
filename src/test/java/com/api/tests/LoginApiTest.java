@@ -32,14 +32,14 @@ public class LoginApiTest {
 	public void LoginApiTests() throws IOException {
 		//UserCredentials userCredentials = new UserCredentials("iamfd", "password");
 		given().spec(SpecUtil.requestSpec(userCredentials))
-				/*
-				 * .baseUri(ConfigManager.getProperty("BASE_URI"))
-				 * .contentType(ContentType.JSON)
-				 * 
-				 * .body(userCredentials)
-				 */
 				.post("login").then().spec(SpecUtil.responseSpec()).body("message", equalTo("Success")).and()
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/Login_response_schema.json"));
 	}
 
 }
+
+//
+//@Test(description = "Veifying if login api is working for FD user", 
+//groups = { "api", "regression", "smoke" },
+//dataProviderClass=com.dataProviders.dataproviderUtils.class.
+//)
