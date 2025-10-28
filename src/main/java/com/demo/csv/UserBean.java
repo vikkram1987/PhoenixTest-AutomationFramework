@@ -1,22 +1,21 @@
 package com.demo.csv;
 
-public class UserPOJO {
+public class UserBean {
 
 	private String username;
 	private String password;
 
-	public UserPOJO() {
+	public UserBean() {
 		
 	}
 	/**
 	 * @param username
 	 * @param password
 	 */
-	public UserPOJO(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
+	/*
+	 * public UserPOJO(String username, String password) { super(); this.username =
+	 * username; this.password = password; }
+	 */
 
 	/**
 	 * @return the username

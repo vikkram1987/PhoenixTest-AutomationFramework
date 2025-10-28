@@ -21,12 +21,20 @@ public class ReadcsvFile_mapToPOJO {
 
 		// Code to Map the csv to POJO
 		
-		  CsvToBean<UserPOJO> csvToBean = new CsvToBeanBuilder(csvReader)
-		  .withType(UserPOJO.class)
+		  CsvToBean<UserBean> csvToBean = new CsvToBeanBuilder(csvReader)
+		  .withType(UserBean.class)
 		  .withIgnoreEmptyLine(true).build();
-		  List<UserPOJO> userList = csvToBean.parse();
+		  List<UserBean> userList = csvToBean.parse();
 		  System.out.println(userList);
 		 
+		  
+			/*
+			 * Part                                     What It Does  
+			 *new CsvToBeanBuilder<UserPOJO>(csvReader) Creates a builder that will convert CSV rows into UserPOJO objects.
+			 * .withType(UserPOJO.class)                Specifies which class represents each CSV row.
+			 * .withIgnoreEmptyLine(true)               Tells OpenCSV to skip blank lines in the file.
+			 * .build()                                 Finalizes setup and creates a CsvToBean<UserPOJO> ready to parse.
+			 */
 
 	}
 
