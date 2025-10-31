@@ -1,9 +1,5 @@
 package com.Model;
 
-public record Problems
-( int id,
- String remark
-)
-{
-	
+public record Problems(int id, String remark) {
+
 }
