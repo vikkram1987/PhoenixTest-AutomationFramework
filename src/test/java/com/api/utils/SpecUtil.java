@@ -2,8 +2,8 @@ package com.api.utils;
 
 import org.hamcrest.Matchers;
 
+import com.Model.UserCredentials;
 import com.api.constants.Role;
-import com.pojo.UserCredentials;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;

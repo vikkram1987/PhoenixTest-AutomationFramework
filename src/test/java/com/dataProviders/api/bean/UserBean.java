@@ -1,19 +1,21 @@
-package com.pojo;
+package com.dataProviders.api.bean;
 
-public class UserCredentials {
-	
+public class UserBean {
+
 	private String username;
 	private String password;
-	
+
+	public UserBean() {
+		
+	}
 	/**
 	 * @param username
 	 * @param password
 	 */
-	public UserCredentials(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
+	/*
+	 * public UserPOJO(String username, String password) { super(); this.username =
+	 * username; this.password = password; }
+	 */
 
 	/**
 	 * @return the username
@@ -45,11 +47,7 @@ public class UserCredentials {
 
 	@Override
 	public String toString() {
-		return "UserCredentials [username=" + username + ", password=" + password + "]";
+		return "UserPOJO [username=" + username + ", password=" + password + "]";
 	}
-	
-	
-	
-	
 
 }
